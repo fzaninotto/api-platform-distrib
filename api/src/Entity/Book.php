@@ -8,30 +8,40 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 
 /** A book. */
 #[ORM\Entity]
 #[ApiResource(mercure: true)]
-#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact'])]
+#[ApiFilter(OrderFilter::class, properties: [
+    'id' => 'ASC',
+    'isbn' => 'ASC',
+    'title' => 'ASC',
+    'author' => 'ASC',
+    'publicationDate' => 'DESC',
+])]
+#[ApiFilter(SearchFilter::class, properties: [
+    'id' => 'exact',
+    'title' => 'ipartial',
+    'author' => 'ipartial',
+])]
+#[ApiFilter(DateFilter::class, properties: ['publicationDate'])]
 class Book
 {
     /** The ID of this book. */
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
-    #[ApiFilter(OrderFilter::class)]
     private ?int $id = null;
     
     /** The ISBN of this book (or null if doesn't have one). */
     #[ORM\Column(nullable: true)]
     #[Assert\Isbn]
-    #[ApiFilter(OrderFilter::class)]
     public ?string $isbn = null;
 
     /** The title of this book. */
     #[ORM\Column]
     #[Assert\NotBlank]
-    #[ApiFilter(OrderFilter::class)]
     #[ApiProperty(iris: ["https://schema.org/name"])]
     public string $title = '';
 
@@ -43,13 +53,11 @@ class Book
     /** The author of this book. */
     #[ORM\Column]
     #[Assert\NotBlank]
-    #[ApiFilter(OrderFilter::class)]
     public string $author = '';
     
     /** The publication date of this book. */
     #[ORM\Column]
     #[Assert\NotNull]
-    #[ApiFilter(OrderFilter::class)]
     public ?\DateTimeImmutable $publicationDate = null;
 
     /** @var Review[] Available reviews for this book. */
