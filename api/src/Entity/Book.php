@@ -6,10 +6,13 @@ use ApiPlatform\Metadata\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 /** A book. */
 #[ORM\Entity]
 #[ApiResource]
+#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact'])]
 class Book
 {
     /** The ID of this book. */

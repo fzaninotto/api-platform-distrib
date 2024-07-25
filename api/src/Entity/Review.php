@@ -5,10 +5,13 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
  
  /** A review of a book. */
 #[ORM\Entity]
 #[ApiResource]
+#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact'])]
 class Review
 {
     /** The ID of this review. */
