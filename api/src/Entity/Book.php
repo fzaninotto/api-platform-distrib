@@ -13,7 +13,7 @@ use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 
 /** A book. */
 #[ORM\Entity]
-#[ApiResource]
+#[ApiResource(mercure: true)]
 #[ApiFilter(SearchFilter::class, properties: ['id' => 'exact'])]
 class Book
 {

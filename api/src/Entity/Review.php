@@ -12,7 +12,7 @@ use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
  
  /** A review of a book. */
 #[ORM\Entity]
-#[ApiResource]
+#[ApiResource(mercure: true)]
 #[ApiFilter(SearchFilter::class, properties: ['id' => 'exact'])]
 class Review
 {
