@@ -3,6 +3,7 @@
 namespace App\Entity;
  
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiProperty;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Metadata\ApiFilter;
@@ -41,6 +42,7 @@ class Review
     #[ORM\Column]
     #[Assert\NotNull]
     #[ApiFilter(OrderFilter::class)]
+    #[ApiProperty(iris: ["https://schema.org/name"])]
     public ?\DateTimeImmutable $publicationDate = null;
  
     /** The book this review is about. */

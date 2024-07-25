@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiProperty;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -31,6 +32,7 @@ class Book
     #[ORM\Column]
     #[Assert\NotBlank]
     #[ApiFilter(OrderFilter::class)]
+    #[ApiProperty(iris: ["https://schema.org/name"])]
     public string $title = '';
 
     /** The description of this book. */
