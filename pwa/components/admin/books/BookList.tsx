@@ -1,11 +1,14 @@
 import { ListGuesser, FieldGuesser } from "@api-platform/admin";
+import { List, Datagrid, NumberField } from "react-admin";
 
 export const BookList = () => (
-  <ListGuesser sort={{ field: "title", order: "ASC" }}>
-    <FieldGuesser source="isbn" label="ISBN" />
-    <FieldGuesser source="title" />
-    <FieldGuesser source="author" />
-    <FieldGuesser source="publicationDate" />
-    <FieldGuesser source="reviews" />
-  </ListGuesser>
+  <List sort={{ field: "title", order: "ASC" }}>
+    <Datagrid>
+      <FieldGuesser source="title" />
+      <FieldGuesser source="isbn" label="ISBN" />
+      <FieldGuesser source="author" />
+      <FieldGuesser source="publicationDate" />
+      <NumberField source="reviews.length" label="Reviews" />
+    </Datagrid>
+  </List>
 );
