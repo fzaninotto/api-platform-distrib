@@ -1,10 +1,19 @@
-import { ListGuesser, FieldGuesser } from "@api-platform/admin";
+import { FieldGuesser } from "@api-platform/admin";
+import { List, Datagrid, ReferenceField, WithRecord } from "react-admin";
+import { Rating } from "@mui/material";
 
 export const ReviewList = () => (
-  <ListGuesser sort={{ field: "publicationDate", order: "DESC" }}>
-    <FieldGuesser source="author" />
-    <FieldGuesser source="book" />
-    <FieldGuesser source="rating" />
-    <FieldGuesser source="publicationDate" />
-  </ListGuesser>
+  <List sort={{ field: "publicationDate", order: "DESC" }}>
+    <Datagrid>
+      <FieldGuesser source="author" />
+      <ReferenceField source="book" reference="books" />
+      <WithRecord
+        label="Rating"
+        render={(record) => (
+          <Rating value={record.rating} readOnly size="small" />
+        )}
+      />
+      <FieldGuesser source="publicationDate" label="Date" />
+    </Datagrid>
+  </List>
 );

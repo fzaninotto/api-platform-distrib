@@ -1,4 +1,4 @@
-import { ListGuesser, FieldGuesser } from "@api-platform/admin";
+import { FieldGuesser } from "@api-platform/admin";
 import { List, Datagrid, NumberField } from "react-admin";
 
 export const BookList = () => (
