@@ -10,7 +10,7 @@ import { ReviewShow } from "./reviews/ReviewShow";
 import { ReviewEdit } from "./reviews/ReviewEdit";
 import { BookShow } from "./books/BookShow";
 
-export const App = () => (
+const App = () => (
   <HydraAdmin
     entrypoint={window.origin}
     layout={Layout}
@@ -35,3 +35,5 @@ export const App = () => (
     />
   </HydraAdmin>
 );
+
+export default App;

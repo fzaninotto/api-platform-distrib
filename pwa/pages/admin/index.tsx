@@ -1,25 +1,12 @@
-import Head from "next/head";
-import { useEffect, useState } from "react";
-import styles from "./admin.module.css";
+import type { NextPage } from "next";
+import dynamic from "next/dynamic";
 
-const Admin = () => {
-  // Load the admin client-side
-  const [DynamicAdmin, setDynamicAdmin] = useState(<p>Loading...</p>);
-  useEffect(() => {
-    (async () => {
-      const App = (await import("../../components/admin/App")).App;
-      setDynamicAdmin(<App />);
-    })();
-  }, []);
+// load the admin client-side
+const App = dynamic(() => import("../../components/admin/App"), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
 
-  return (
-    <div className={styles.admin}>
-      <Head>
-        <title>API Platform Admin</title>
-      </Head>
+const Admin: NextPage = () => <App />;
 
-      {DynamicAdmin}
-    </div>
-  );
-};
 export default Admin;
